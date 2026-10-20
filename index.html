@@ -391,7 +391,7 @@
 <!-- ── 04 metas ── -->
 <section>
   <div class="shead"><span class="num">04</span><h2>Metas</h2></div>
-  <p>A meta é o cenário do meio, com <b>R$ 10 mil de captação</b>. São premissas, não promessa. A régua de cada etapa serve para saber cedo onde o resultado está vindo abaixo e agir antes da live.</p>
+  <p>A meta base é <b>R$ 5 mil de captação paga mais 200 leads do orgânico</b>. São premissas, não promessa. A régua de cada etapa serve para saber cedo onde o resultado está vindo abaixo e agir antes da live.</p>
   <div class="funnel" style="margin-top:20px" id="metas"></div>
   <p class="note">Premissas: ~600 alunos na base; 40% dos alunos entram no grupo; lead pago a R$ 8; 2% do grupo aberto compra; 4% da base de alunos compra. Preço: R$ 2.998 aberto e R$ 2.498 para aluno.</p>
 </section>
@@ -405,7 +405,7 @@
     <div class="sim-in">
       <div class="ctl main" style="grid-column:1/-1">
         <div class="top"><label for="verba">Verba de captação (onda 2)</label><output id="o-verba"></output></div>
-        <input type="range" id="verba" min="0" max="40000" step="1000" value="10000">
+        <input type="range" id="verba" min="0" max="40000" step="1000" value="5000">
         <div class="presets" id="presets">
           <button type="button" data-v="5000">R$ 5 mil</button>
           <button type="button" data-v="10000">R$ 10 mil</button>
@@ -425,7 +425,7 @@
       </div>
       <div class="ctl">
         <div class="top"><label for="org">Leads do orgânico</label><output id="o-org"></output></div>
-        <input type="range" id="org" min="0" max="3000" step="100" value="0">
+        <input type="range" id="org" min="0" max="3000" step="50" value="200">
         <div class="hint">quem entra pelo convite do Vitor, sem custo</div>
       </div>
       <div class="ctl">
@@ -502,11 +502,11 @@
 
   function renderMetas(){
     var alunosGrupo=Math.round(BASE*ENTRA_GRUPO), vAl=Math.round(BASE*0.04);
-    var leads=Math.round(10000/8), vAb=Math.round(leads*0.02);
+    var pagos=Math.round(5000/8), org=200, leads=pagos+org, vAb=Math.round(leads*0.02);
     var row=function(c){return '<div class="frow'+(c.cls?' '+c.cls:'')+'">'+c.cells.map(function(x){return '<div>'+x+'</div>'}).join('')+'</div>'};
     var html=row({cls:'h',cells:['','Convidados','No grupo','Vendas','Faturamento']});
     html+=row({cells:['Onda 1 · alunos','<b>'+int(BASE)+'</b><small>base de alunos</small>','<b>'+int(alunosGrupo)+'</b><small>40% da base</small>','<b>'+vAl+'</b><small>4% da base</small>','<b>'+mil(vAl*PRECO_ALUNO)+'</b>']});
-    html+=row({cells:['Onda 2 · aberta','<b>R$ 10 mil</b><small>em captação</small>','<b>'+int(leads)+'</b><small>lead a R$ 8</small>','<b>'+vAb+'</b><small>2% do grupo</small>','<b>'+mil(vAb*PRECO)+'</b>']});
+    html+=row({cells:['Onda 2 · captação paga + orgânica','<b>R$ 5 mil</b><small>em captação + orgânico</small>','<b>'+int(leads)+'</b><small>'+int(pagos)+' pagos (R$ 8) + '+org+' orgânicos</small>','<b>'+vAb+'</b><small>2% do grupo</small>','<b>'+mil(vAb*PRECO)+'</b>']});
     html+=row({cls:'tot',cells:['Black inteira','','','<b>'+(vAl+vAb)+'</b>','<b>'+mil(vAl*PRECO_ALUNO+vAb*PRECO)+'</b>']});
     $('metas').innerHTML=html;
   }
