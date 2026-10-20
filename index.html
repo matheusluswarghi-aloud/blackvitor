@@ -466,23 +466,9 @@
   <p class="note">Faturamento da onda aberta por verba, com o custo por lead escolhido no simulador e sem contar o orgânico. A linha destacada é a verba selecionada. Na prática o custo por lead tende a subir quando a verba cresce, então vale simular as verbas maiores com um custo por lead mais alto. Faturamento líquido estimado já descontando as taxas (8,9% + R$ 1,59 por venda).</p>
 </section>
 
-<!-- ── 06 remuneração ── -->
+<!-- ── 06 em aberto ── -->
 <section>
-  <div class="shead"><span class="num">06</span><h2>Remuneração do Matheus</h2></div>
-  <div class="pay">
-    <p>Minha proposta é <b>10% do faturamento líquido</b>, por desenhar e arquitetar toda a estratégia.</p>
-    <div class="pay-grid">
-      <div><div class="k">Variável</div><div class="v">10% do faturamento líquido</div></div>
-      <div><div class="k">Sobre o quê</div><div class="v">Vendas do Clube do Plantonista nas duas ondas</div></div>
-      <div><div class="k">Janela</div><div class="v">21/10 a 15/11, descontados reembolsos</div></div>
-    </div>
-    <p style="margin-top:16px">No cenário do simulador acima, o variável seria de <b id="r-pay"></b>.</p>
-  </div>
-</section>
-
-<!-- ── 07 em aberto ── -->
-<section>
-  <div class="shead"><span class="num">07</span><h2>Para decidir na call</h2></div>
+  <div class="shead"><span class="num">06</span><h2>Para decidir na call</h2></div>
   <ul class="open">
     <li><b>Verba de captação da onda 2.</b> O simulador mostra o efeito de cada faixa.</li>
     <li><b>Preço de aluno.</b> A sugestão é R$ 1.401 (R$ 1.998 menos os R$ 597 do ECG). Ele nunca pode ficar acima do preço da live aberta, porque os alunos vão ver a campanha.</li>
@@ -532,7 +518,6 @@
     $('r-roas').textContent=r.roas===null?'—':'R$ '+r.roas.toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1});
     var sobra=r.liq-v[0];
     $('r-break').innerHTML='Alunos: <b>'+int(r.vAl)+' vendas · '+mil(r.fAl)+'</b> &nbsp;·&nbsp; Aberta: <b>'+int(r.vAb)+' vendas · '+mil(r.fAb)+'</b> &nbsp;·&nbsp; Faturamento líquido: <b>'+mil(r.liq)+'</b> &nbsp;·&nbsp; Depois de pagar o anúncio: <b>'+mil(sobra)+'</b>';
-    $('r-pay').textContent=mil(r.liq*0.10)+' ('+mil(r.liq)+' de líquido)';
     document.querySelectorAll('#presets button').forEach(function(b){b.setAttribute('aria-pressed',String(+b.dataset.v===v[0]))});
     renderCmp(v);
   }
