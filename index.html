@@ -243,15 +243,6 @@
     .sim-break{padding:14px 18px 16px}
   }
 
-  .cmp{margin-top:22px;background:var(--surface);border:1px solid var(--line-strong);overflow-x:auto}
-  .cmp table{width:100%;border-collapse:collapse;min-width:560px;font-size:.9rem}
-  .cmp th,.cmp td{padding:12px 14px;border-top:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
-  .cmp th:first-child,.cmp td:first-child{text-align:left}
-  .cmp thead th{border-top:0;font-family:var(--mono);font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-  .cmp td{color:var(--ink-2)}
-  .cmp td:first-child{font-family:var(--mono);font-weight:700;color:var(--ink)}
-  .cmp td.strong{color:var(--ink);font-weight:600}
-  .cmp tr.cur td{background:var(--accent-soft)}
 
   .open li{padding:12px 0 12px 20px;position:relative;color:var(--ink-2);border-top:1px solid var(--line);max-width:66ch}
   .open li:first-child{border-top:0;padding-top:2px}
@@ -452,8 +443,7 @@
     <div class="sim-break" id="r-break"></div>
   </div>
 
-  <div class="cmp" id="cmp"></div>
-  <p class="note">Faturamento da onda aberta por verba, com o custo por lead escolhido no simulador e sem contar o orgânico. A linha destacada é a verba selecionada. Na prática o custo por lead tende a subir quando a verba cresce, então vale simular as verbas maiores com um custo por lead mais alto. Faturamento líquido estimado já descontando as taxas (8,9% + R$ 1,59 por venda).</p>
+  <p class="note">Na prática o custo por lead tende a subir quando a verba cresce, então vale simular as verbas maiores com um custo por lead mais alto. Faturamento líquido estimado já descontando as taxas (8,9% + R$ 1,59 por venda).</p>
 </section>
 
 <!-- ── 06 em aberto ── -->
@@ -508,17 +498,6 @@
     var sobra=r.liq-v[0];
     $('r-break').innerHTML='Alunos: <b>'+int(r.vAl)+' vendas · '+mil(r.fAl)+'</b> &nbsp;·&nbsp; Aberta: <b>'+int(r.vAb)+' vendas · '+mil(r.fAb)+'</b> &nbsp;·&nbsp; Faturamento líquido: <b>'+mil(r.liq)+'</b> &nbsp;·&nbsp; Depois de pagar o anúncio: <b>'+mil(sobra)+'</b>';
     document.querySelectorAll('#presets button').forEach(function(b){b.setAttribute('aria-pressed',String(+b.dataset.v===v[0]))});
-    renderCmp(v);
-  }
-
-  function renderCmp(v){
-    var verbas=[5000,10000,15000,20000,30000], cpl=v[1];
-    var h='<table><thead><tr><th>Verba</th><th>Leads</th><th>Vendas a 2%</th><th>Fatura a 1%</th><th>Fatura a 2%</th><th>Fatura a 3%</th><th>Volta por R$ 1 (2%)</th></tr></thead><tbody>';
-    verbas.forEach(function(vb){
-      var l=vb/cpl, f=function(c){return Math.round(l*c/100)*PRECO};
-      h+='<tr'+(vb===v[0]?' class="cur"':'')+'><td>'+mil(vb)+'</td><td>'+int(l)+'</td><td>'+int(Math.round(l*0.02))+'</td><td>'+mil(f(1))+'</td><td class="strong">'+mil(f(2))+'</td><td>'+mil(f(3))+'</td><td>R$ '+(f(2)/vb).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1})+'</td></tr>';
-    });
-    $('cmp').innerHTML=h+'</tbody></table>';
   }
 
   function renderMetas(){
