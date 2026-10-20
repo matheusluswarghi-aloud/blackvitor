@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Black do Plantonista — Clube do Plantonista</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+  :root{
+    --paper:#EEEFF1;
+    --surface:#FFFFFF;
+    --ink:#13161B;
+    --ink-2:#3C434D;
+    --muted:#767D88;
+    --line:#DBDDE1;
+    --line-strong:#BCC0C7;
+    --accent:#A62B26;
+    --accent-soft:#F5E8E7;
+    --ok:#0E6E66;
+    --ok-soft:#E3F1EF;
+    --warn:#8A5A00;
+    --warn-soft:#FBF1DC;
+    --sans:"Instrument Sans","Helvetica Neue",Arial,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#0D0F13;
+      --surface:#161A20;
+      --ink:#ECEEF1;
+      --ink-2:#B4BAC3;
+      --muted:#7F8794;
+      --line:#242932;
+      --line-strong:#39414D;
+      --accent:#EE6A60;
+      --accent-soft:#241819;
+      --ok:#4FB3A6;
+      --ok-soft:#14231F;
+      --warn:#E0B355;
+      --warn-soft:#2A2214;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0D0F13;
+    --surface:#161A20;
+    --ink:#ECEEF1;
+    --ink-2:#B4BAC3;
+    --muted:#7F8794;
+    --line:#242932;
+    --line-strong:#39414D;
+    --accent:#EE6A60;
+    --accent-soft:#241819;
+    --ok:#4FB3A6;
+    --ok-soft:#14231F;
+    --warn:#E0B355;
+    --warn-soft:#2A2214;
+  }
+
+  *,*::before,*::after{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:17px;
+    line-height:1.58;
+    -webkit-font-smoothing:antialiased;
+  }
+  p{margin:0}
+  ul,ol{margin:0;padding:0;list-style:none}
+  h1,h2,h3{margin:0;font-weight:600;text-wrap:balance}
+  a{color:var(--accent);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 35%,transparent)}
+  a:hover{border-bottom-color:var(--accent)}
+
+  .wrap{max-width:860px;margin:0 auto;padding:0 32px}
+  @media (max-width:520px){.wrap{padding:0 16px}}
+  .kicker{
+    font-family:var(--mono);font-size:.68rem;font-weight:500;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--muted);
+  }
+  .num-t{font-variant-numeric:tabular-nums}
+
+  /* ── abas ─────────────────────────────────────────── */
+  .tabs{
+    position:sticky;top:0;z-index:50;
+    background:color-mix(in srgb,var(--paper) 86%,transparent);
+    backdrop-filter:saturate(180%) blur(14px);
+    -webkit-backdrop-filter:saturate(180%) blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .tabs ul{display:flex;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
+  .tabs ul::-webkit-scrollbar{display:none}
+  .tabs a{
+    display:block;padding:15px 0 13px;margin-right:28px;
+    font-family:var(--mono);font-size:.66rem;font-weight:500;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:2px solid transparent;white-space:nowrap;
+    transition:color .18s ease,border-color .18s ease;
+  }
+  .tabs a:hover{color:var(--ink);border-bottom-color:var(--line-strong)}
+  .tabs a[aria-current="page"]{color:var(--accent);border-bottom-color:var(--accent)}
+  .tabs li:last-child a{margin-right:0}
+
+  /* ── topo ─────────────────────────────────────────── */
+  header{padding:52px 0 8px}
+  .rule-top{height:3px;background:var(--accent);width:52px;margin-bottom:26px}
+  h1{
+    font-size:clamp(2.1rem,5.4vw,3.15rem);line-height:1.03;
+    letter-spacing:-.028em;font-weight:700;margin:12px 0 18px;
+  }
+  .sub{color:var(--ink-2);max-width:60ch;font-size:1.04rem}
+  .sub b{color:var(--ink);font-weight:600}
+  .meta{
+    margin-top:26px;padding-top:16px;border-top:1px solid var(--line-strong);
+    display:flex;gap:10px 26px;flex-wrap:wrap;
+    font-family:var(--mono);font-size:.63rem;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+  }
+
+  /* ── duas ondas ───────────────────────────────────── */
+  .waves{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line-strong);border:1px solid var(--line-strong);margin:40px 0 4px}
+  .wave{background:var(--surface);padding:22px 24px 24px}
+  .wave .kicker{color:var(--accent)}
+  .wave h3{font-size:1.18rem;letter-spacing:-.015em;margin:8px 0 10px}
+  .wave dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:.92rem}
+  .wave dt{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-top:4px}
+  .wave dd{margin:0;color:var(--ink-2)}
+  .wave dd b{color:var(--ink);font-weight:600}
+  @media (max-width:640px){.waves{grid-template-columns:1fr}.wave{padding:20px 18px}}
+
+  /* ── seções ───────────────────────────────────────── */
+  section{padding:44px 0 6px;border-top:1px solid var(--line);margin-top:44px}
+  .shead{display:flex;align-items:baseline;gap:14px;margin-bottom:20px}
+  .shead .num{font-family:var(--mono);font-size:.68rem;font-weight:700;letter-spacing:.15em;color:var(--accent);flex:none}
+  h2{font-size:1.42rem;letter-spacing:-.021em;line-height:1.18;font-weight:600}
+  section > p{color:var(--ink-2);max-width:66ch}
+  section > p + p{margin-top:14px}
+  section b{color:var(--ink);font-weight:600}
+  .note{font-size:.86rem;color:var(--muted);margin-top:14px;max-width:66ch}
+
+  /* ── cronograma ───────────────────────────────────── */
+  .timeline{margin-top:6px;background:var(--surface);border:1px solid var(--line-strong)}
+  .tl{display:grid;grid-template-columns:118px minmax(0,1fr);gap:18px;padding:15px 22px;border-top:1px solid var(--line)}
+  .tl:first-child{border-top:0}
+  .tl .d{font-family:var(--mono);font-size:.7rem;font-weight:700;letter-spacing:.06em;color:var(--ink);padding-top:3px}
+  .tl .d small{display:block;font-weight:500;color:var(--muted);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;margin-top:2px}
+  .tl h3{font-size:1rem;letter-spacing:-.01em;line-height:1.35}
+  .tl p{font-size:.9rem;color:var(--ink-2);margin-top:3px}
+  .tl.key{background:var(--accent-soft)}
+  .tl.key .d{color:var(--accent)}
+  .tag{display:inline-block;font-family:var(--mono);font-size:.56rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;margin-left:6px;vertical-align:2px;border:1px solid var(--line-strong);color:var(--muted)}
+  .tag.a{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 45%,transparent)}
+  @media (max-width:560px){.tl{grid-template-columns:1fr;gap:4px;padding:14px 18px}}
+
+  /* ── oferta ───────────────────────────────────────── */
+  .offer{background:var(--surface);border:1px solid var(--line-strong);border-left:3px solid var(--accent);margin-top:6px}
+  .offer-top{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;flex-wrap:wrap;padding:22px 24px 18px;border-bottom:1px solid var(--line)}
+  .offer-top h3{font-size:1.3rem;letter-spacing:-.018em}
+  .offer-top p{color:var(--ink-2);font-size:.92rem;margin-top:4px}
+  .price{text-align:right}
+  .price .big{font-family:var(--mono);font-size:1.6rem;font-weight:700;color:var(--accent);letter-spacing:-.02em;line-height:1}
+  .price .small{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+  @media (max-width:520px){.price{text-align:left}}
+  .mods li{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:12px;align-items:baseline;padding:13px 24px;border-top:1px solid var(--line)}
+  .mods li:first-child{border-top:0}
+  .mods .i{font-family:var(--mono);font-size:.68rem;font-weight:700;color:var(--muted)}
+  .mods b{display:block;font-size:.98rem}
+  .mods span.d{display:block;font-size:.88rem;color:var(--ink-2);margin-top:2px}
+  .st{font-family:var(--mono);font-size:.56rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:3px 8px;white-space:nowrap}
+  .st.ok{background:var(--ok-soft);color:var(--ok)}
+  .st.mid{background:var(--warn-soft);color:var(--warn)}
+  .st.no{background:var(--accent-soft);color:var(--accent)}
+  .plus{padding:16px 24px 20px;border-top:1px solid var(--line-strong);background:color-mix(in srgb,var(--paper) 55%,var(--surface))}
+  .plus .kicker{margin-bottom:8px}
+  .plus li{font-size:.92rem;color:var(--ink-2);padding:3px 0 3px 16px;position:relative}
+  .plus li::before{content:"+";position:absolute;left:0;top:2px;font-family:var(--mono);font-weight:700;color:var(--accent)}
+  .plus b{color:var(--ink)}
+  @media (max-width:560px){
+    .mods li{grid-template-columns:24px minmax(0,1fr);padding:13px 18px}
+    .mods .st{grid-column:2;justify-self:start;margin-top:6px}
+    .offer-top,.plus{padding-left:18px;padding-right:18px}
+  }
+
+  /* ── pendências ───────────────────────────────────── */
+  .owners{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line-strong);border:1px solid var(--line-strong);margin-top:6px}
+  .owner{background:var(--surface);padding:18px 22px 20px}
+  .owner h3{font-family:var(--mono);font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+  .owner li{font-size:.9rem;color:var(--ink-2);padding:6px 0 6px 26px;position:relative;border-top:1px solid var(--line)}
+  .owner li:first-child{border-top:0}
+  .owner li::before{content:"";position:absolute;left:2px;top:11px;width:12px;height:12px;border:1.5px solid var(--line-strong)}
+  .owner li small{display:block;font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:1px}
+  @media (max-width:640px){.owners{grid-template-columns:1fr}.owner{padding:16px 18px}}
+
+  /* ── metas ────────────────────────────────────────── */
+  .funnel{margin-top:6px;background:var(--surface);border:1px solid var(--line-strong)}
+  .frow{display:grid;grid-template-columns:150px repeat(4,minmax(0,1fr));border-top:1px solid var(--line)}
+  .frow:first-child{border-top:0}
+  .frow > div{padding:13px 14px;border-left:1px solid var(--line);font-size:.9rem;color:var(--ink-2)}
+  .frow > div:first-child{border-left:0;font-weight:600;color:var(--ink)}
+  .frow.h > div{font-family:var(--mono);font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .frow b{display:block;font-family:var(--mono);font-size:1.05rem;color:var(--ink);font-variant-numeric:tabular-nums}
+  .frow.tot{background:var(--accent-soft)}
+  .frow.tot b{color:var(--accent)}
+  .frow small{font-size:.76rem;color:var(--muted)}
+  @media (max-width:640px){
+    .funnel{overflow-x:auto}
+    .frow{min-width:560px}
+  }
+
+  /* ── simulador ────────────────────────────────────── */
+  .sim{background:var(--surface);border:1px solid var(--line-strong);margin-top:6px}
+  .sim-in{display:grid;grid-template-columns:1fr 1fr;gap:4px 34px;padding:22px 24px 10px}
+  .ctl{padding:8px 0 12px}
+  .ctl .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .ctl label{font-size:.88rem;color:var(--ink-2)}
+  .ctl output{font-family:var(--mono);font-size:.92rem;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .ctl input[type=range]{width:100%;margin:10px 0 0;accent-color:var(--accent);height:22px}
+  .ctl .hint{font-size:.74rem;color:var(--muted);margin-top:2px}
+  .ctl.main label{font-weight:600;color:var(--ink)}
+  .ctl.main output{color:var(--accent);font-size:1.1rem}
+  .presets{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+  .presets button{font-family:var(--mono);font-size:.66rem;font-weight:700;letter-spacing:.06em;padding:7px 11px;background:transparent;color:var(--ink-2);border:1px solid var(--line-strong);cursor:pointer}
+  .presets button:hover{border-color:var(--accent);color:var(--accent)}
+  .presets button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+  .sim-out{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line-strong)}
+  .sim-out > div{padding:16px 16px 18px;border-left:1px solid var(--line)}
+  .sim-out > div:first-child{border-left:0}
+  .sim-out .n{display:block;font-family:var(--mono);font-size:1.25rem;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:-.02em;line-height:1.15}
+  .sim-out .t{display:block;font-family:var(--mono);font-size:.56rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-top:7px;line-height:1.45}
+  .sim-out .hl{background:var(--accent-soft)}
+  .sim-out .hl .n{color:var(--accent)}
+  .sim-break{padding:14px 24px 18px;border-top:1px solid var(--line);font-size:.86rem;color:var(--ink-2)}
+  .sim-break b{color:var(--ink);font-variant-numeric:tabular-nums}
+  @media (max-width:640px){
+    .sim-in{grid-template-columns:1fr;padding:18px 18px 6px}
+    .sim-out{grid-template-columns:1fr 1fr}
+    .sim-out > div:nth-child(3){border-left:0}
+    .sim-out > div:nth-child(n+3){border-top:1px solid var(--line)}
+    .sim-break{padding:14px 18px 16px}
+  }
+
+  .cmp{margin-top:22px;background:var(--surface);border:1px solid var(--line-strong);overflow-x:auto}
+  .cmp table{width:100%;border-collapse:collapse;min-width:560px;font-size:.9rem}
+  .cmp th,.cmp td{padding:12px 14px;border-top:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .cmp th:first-child,.cmp td:first-child{text-align:left}
+  .cmp thead th{border-top:0;font-family:var(--mono);font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .cmp td{color:var(--ink-2)}
+  .cmp td:first-child{font-family:var(--mono);font-weight:700;color:var(--ink)}
+  .cmp td.strong{color:var(--ink);font-weight:600}
+  .cmp tr.cur td{background:var(--accent-soft)}
+
+  /* ── remuneração ──────────────────────────────────── */
+  .pay{background:var(--surface);border:1px solid var(--line-strong);border-left:3px solid var(--accent);padding:24px 26px;margin-top:6px}
+  .pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:18px}
+  .pay-grid > div{background:var(--surface);padding:14px 16px}
+  .pay-grid .k{font-family:var(--mono);font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .pay-grid .v{font-size:.95rem;color:var(--ink);margin-top:4px}
+  .pay p{color:var(--ink-2);font-size:.95rem}
+  .pay p + p{margin-top:10px}
+  @media (max-width:560px){.pay{padding:20px 18px}.pay-grid{grid-template-columns:1fr}}
+
+  .open li{padding:12px 0 12px 20px;position:relative;color:var(--ink-2);border-top:1px solid var(--line);max-width:66ch}
+  .open li:first-child{border-top:0;padding-top:2px}
+  .open li::before{content:"?";position:absolute;left:0;top:12px;font-family:var(--mono);font-size:.8rem;font-weight:700;color:var(--accent)}
+  .open li:first-child::before{top:2px}
+
+  footer{margin:64px 0 0;padding:22px 0 40px;border-top:1px solid var(--line);font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<nav class="tabs">
+  <div class="wrap">
+    <ul>
+      <li><a href="https://luswarghi.com/cronogramavitor/">Cronograma de entregas</a></li>
+      <li><a href="https://luswarghi.com/ecgcoutinho/">Pesquisa de mercado</a></li>
+      <li><a href="https://luswarghi.com/plantaovitor/">Plantão Descomplicado</a></li>
+      <li><a href="https://luswarghi.com/propostavitor/">Próximos passos</a></li>
+      <li><a href="https://luswarghi.com/blackvitor/" aria-current="page">Black</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<header>
+  <div class="rule-top"></div>
+  <span class="kicker">Proposta · Black do Plantonista</span>
+  <h1>Lançar o Clube do Plantonista em novembro, em duas ondas</h1>
+  <p class="sub">A Black é o <b>prazo</b> para o Clube sair do papel. Primeiro para quem já é aluno, que é o público mais quente que existe. Seis dias depois, para todo mundo, já com a oferta testada.</p>
+  <div class="meta">
+    <span>Rascunho para Vitor e Caitto</span>
+    <span>19/10/2026</span>
+    <span>Janela: 21/10 a 15/11</span>
+  </div>
+</header>
+
+<div class="waves">
+  <div class="wave">
+    <span class="kicker">Onda 1 · alunos</span>
+    <h3>Plantão Descomplicado só para alunos</h3>
+    <dl>
+      <dt>Captação</dt><dd>a partir de <b>qua, 21/10</b>, pelo WhatsApp oficial e por e-mail, para um grupo só de alunos</dd>
+      <dt>Live</dt><dd><b>qua, 04/11</b>, com o carrinho abrindo ao vivo</dd>
+      <dt>Condição</dt><dd>preço de aluno, abatendo o que já pagou no ECG Descomplicado</dd>
+    </dl>
+  </div>
+  <div class="wave">
+    <span class="kicker">Onda 2 · aberta</span>
+    <h3>Plantão Descomplicado para o público</h3>
+    <dl>
+      <dt>Captação</dt><dd>a partir de <b>seg, 26/10</b>: convite do Vitor no orgânico, anúncio e página de captação, tudo para um grupo VIP</dd>
+      <dt>Live</dt><dd><b>ter, 10/11</b>, com o carrinho abrindo ao vivo</dd>
+      <dt>Oferta</dt><dd>Clube do Plantonista vitalício, <b>R$ 1.998</b></dd>
+    </dl>
+  </div>
+</div>
+
+<!-- ── 01 cronograma ── -->
+<section>
+  <div class="shead"><span class="num">01</span><h2>Cronograma</h2></div>
+  <div class="timeline">
+    <div class="tl"><div class="d">19–20/10<small>seg–ter</small></div><div><h3>Ok do Vitor e do Caitto</h3><p>Fechar preço, condição de aluno e verba de captação. Pedir à Meta o template de marketing do convite (o atual é de utilidade e não pode levar convite de venda).</p></div></div>
+    <div class="tl key"><div class="d">21/10<small>qua</small></div><div><h3>Começa a captação dos alunos <span class="tag a">onda 1</span></h3><p>Disparo pelo WhatsApp oficial e por e-mail para o grupo dos alunos. Lembretes até a live.</p></div></div>
+    <div class="tl"><div class="d">24–25/10<small>sáb–dom</small></div><div><h3>Vitor grava os módulos 1 e 2</h3><p>Os slides já estão prontos. No mesmo fim de semana: convites do orgânico e criativos de captação.</p></div></div>
+    <div class="tl key"><div class="d">26/10<small>seg</small></div><div><h3>Começa a captação aberta <span class="tag a">onda 2</span></h3><p>Convite no perfil do Vitor, anúncio de captação na CA 02 e página de inscrição, tudo para o grupo VIP.</p></div></div>
+    <div class="tl"><div class="d">31/10–01/11<small>sáb–dom</small></div><div><h3>Vitor grava dor torácica e arritmias</h3><p>Slides antigos convertidos pela IA para o padrão novo do ECG Descomplicado, revisados por ele antes.</p></div></div>
+    <div class="tl key"><div class="d">04/11<small>qua</small></div><div><h3>Live dos alunos e carrinho aberto <span class="tag a">onda 1</span></h3><p>Carrinho de aluno até sáb, 07/11.</p></div></div>
+    <div class="tl key"><div class="d">10/11<small>ter</small></div><div><h3>Live aberta e carrinho aberto <span class="tag a">onda 2</span></h3><p>Carrinho até sáb, 14/11. Depois da live, o disparo do ECG GO para a base fica liberado.</p></div></div>
+    <div class="tl"><div class="d">nov–dez</div><div><h3>Módulos restantes liberados com data</h3><p>PCR, insuficiência cardíaca e exames de porta, com as datas anunciadas na venda.</p></div></div>
+  </div>
+  <p class="note">Abrir com parte do curso gravado e o resto em datas declaradas foi a proposta do próprio Vitor. Com os módulos 1 a 4 prontos em 01/11, o Clube chega vendável nas duas lives.</p>
+</section>
+
+<!-- ── 02 oferta ── -->
+<section>
+  <div class="shead"><span class="num">02</span><h2>O que é o Clube do Plantonista</h2></div>
+  <p>O ECG Descomplicado ensina a <b>ler</b> o eletro. O Clube ensina a <b>conduzir o plantão</b>, e o eletro é uma das peças. Emergência é o tema mais pedido pelos próprios alunos nas fichas de matrícula (80% dos mais recentes).</p>
+  <div class="offer" style="margin-top:22px">
+    <div class="offer-top">
+      <div>
+        <h3>Clube do Plantonista</h3>
+        <p>Curso gravado de emergência + acompanhamento com o Vitor</p>
+      </div>
+      <div class="price">
+        <div class="big">R$ 1.998</div>
+        <div class="small">vitalício · parcelado na Hotmart</div>
+      </div>
+    </div>
+    <ul class="mods">
+      <li><span class="i">01</span><div><b>Plantão seguro</b><span class="d">Como funciona o plantão, passagem de plantão, raciocínio clínico na emergência, comunicação, prontuário. 7 aulas.</span></div><span class="st ok">slides prontos</span></li>
+      <li><span class="i">02</span><div><b>Arsenal do plantonista</b><span class="d">As drogas de emergência que o médico tem receio de usar, como noradrenalina e adrenalina.</span></div><span class="st ok">slides prontos</span></li>
+      <li><span class="i">03</span><div><b>Dor torácica</b><span class="d">Separar o que mata do que não mata, o eletro no infarto, os primeiros minutos.</span></div><span class="st mid">esqueleto da mentoria</span></li>
+      <li><span class="i">04</span><div><b>Arritmias</b><span class="d">Reconhecer, separar estável de instável, quando dar remédio e quando chocar.</span></div><span class="st mid">esqueleto da mentoria</span></li>
+      <li><span class="i">05</span><div><b>PCR, insuficiência cardíaca e exames de porta</b><span class="d">Na ordem do que os alunos pedem nas fichas. Liberados com data.</span></div><span class="st no">do zero</span></li>
+    </ul>
+    <div class="plus">
+      <div class="kicker">Junto</div>
+      <ul>
+        <li><b>Grupo de WhatsApp</b> com o Vitor respondendo dúvidas uma vez por dia, em horário fixo</li>
+        <li><b>Encontro ao vivo mensal</b> com casos de plantão</li>
+        <li><b>ECG Descomplicado</b>, para quem ainda não tem</li>
+        <li><b>ECG GO</b>, o app de treino</li>
+      </ul>
+    </div>
+  </div>
+  <p class="note">Os nomes e o conteúdo dos módulos 3 a 5 são o desenho inicial. O conteúdo final é do Vitor.</p>
+</section>
+
+<!-- ── 03 pendências ── -->
+<section>
+  <div class="shead"><span class="num">03</span><h2>O que falta, e com quem</h2></div>
+  <div class="owners">
+    <div class="owner">
+      <h3>Vitor</h3>
+      <ul>
+        <li>Aprovar o plano, o preço e a condição de aluno<small>até ter, 20/10</small></li>
+        <li>Gravar os módulos 1 e 2<small>24–25/10</small></li>
+        <li>Gravar convites do orgânico e criativos de captação<small>24–25/10</small></li>
+        <li>Revisar os slides de dor torácica e arritmias<small>até 30/10</small></li>
+        <li>Gravar dor torácica e arritmias<small>31/10–01/11</small></li>
+        <li>Dar as duas lives<small>04/11 e 10/11</small></li>
+      </ul>
+    </div>
+    <div class="owner">
+      <h3>Caitto</h3>
+      <ul>
+        <li>Criar o produto do Clube na Hotmart, com o preço de aluno<small>até 30/10</small></li>
+        <li>Área de membros com os módulos e as datas de liberação<small>até 03/11</small></li>
+        <li>Definir por onde sai o e-mail para os alunos<small>até 20/10</small></li>
+        <li>Grupo de WhatsApp do Clube e o horário fixo de resposta<small>até 04/11</small></li>
+      </ul>
+    </div>
+    <div class="owner">
+      <h3>M4 (tráfego)</h3>
+      <ul>
+        <li>Campanha de captação na CA 02 com a verba combinada<small>no ar em 26/10</small></li>
+        <li>Custo por lead acompanhado todo dia, para ajustar a verba cedo<small>26/10–10/11</small></li>
+      </ul>
+    </div>
+    <div class="owner">
+      <h3>Matheus</h3>
+      <ul>
+        <li>Template de marketing do WhatsApp aprovado e disparos para os alunos<small>21/10</small></li>
+        <li>Converter os slides antigos de dor torácica e arritmias pela IA<small>até 28/10</small></li>
+        <li>Roteiros dos convites e dos criativos de captação<small>até 23/10</small></li>
+        <li>Página de captação e grupos VIP<small>até 25/10</small></li>
+        <li>Cronograma de mensagens dos dois grupos<small>21/10 e 26/10</small></li>
+        <li>Roteiro e pitch das duas lives<small>até 02/11</small></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ── 04 metas ── -->
+<section>
+  <div class="shead"><span class="num">04</span><h2>Metas</h2></div>
+  <p>A meta é o cenário do meio, com <b>R$ 10 mil de captação</b>. São premissas, não promessa. A régua de cada etapa serve para saber cedo onde o resultado está vindo abaixo e agir antes da live.</p>
+  <div class="funnel" style="margin-top:20px" id="metas"></div>
+  <p class="note">Premissas: ~600 alunos na base; 40% dos alunos entram no grupo; lead pago a R$ 8; 2% do grupo aberto compra; 6% da base de alunos compra. Preço de aluno: R$ 1.998 menos R$ 597.</p>
+</section>
+
+<!-- ── 05 simulador ── -->
+<section>
+  <div class="shead"><span class="num">05</span><h2>Simulador de investimento</h2></div>
+  <p>Mexa na verba de captação e veja o que muda. O dado mais importante é o retorno: quanto volta para cada real colocado no anúncio. Para comparar: hoje o funil da VSL gasta cerca de R$ 3 mil por dia.</p>
+
+  <div class="sim" style="margin-top:22px">
+    <div class="sim-in">
+      <div class="ctl main" style="grid-column:1/-1">
+        <div class="top"><label for="verba">Verba de captação (onda 2)</label><output id="o-verba"></output></div>
+        <input type="range" id="verba" min="0" max="40000" step="1000" value="10000">
+        <div class="presets" id="presets">
+          <button type="button" data-v="5000">R$ 5 mil</button>
+          <button type="button" data-v="10000">R$ 10 mil</button>
+          <button type="button" data-v="20000">R$ 20 mil</button>
+          <button type="button" data-v="30000">R$ 30 mil</button>
+        </div>
+      </div>
+      <div class="ctl">
+        <div class="top"><label for="cpl">Custo por lead</label><output id="o-cpl"></output></div>
+        <input type="range" id="cpl" min="4" max="16" step="0.5" value="8">
+        <div class="hint">quanto custa cada médico que entra no grupo</div>
+      </div>
+      <div class="ctl">
+        <div class="top"><label for="conv">Grupo aberto que compra</label><output id="o-conv"></output></div>
+        <input type="range" id="conv" min="0.5" max="4" step="0.25" value="2">
+        <div class="hint">1% conservador · 2% base · 3% otimista</div>
+      </div>
+      <div class="ctl">
+        <div class="top"><label for="org">Leads do orgânico</label><output id="o-org"></output></div>
+        <input type="range" id="org" min="0" max="3000" step="100" value="0">
+        <div class="hint">quem entra pelo convite do Vitor, sem custo</div>
+      </div>
+      <div class="ctl">
+        <div class="top"><label for="alu">Alunos que compram</label><output id="o-alu"></output></div>
+        <input type="range" id="alu" min="2" max="12" step="1" value="6">
+        <div class="hint">de ~600 alunos · 3% conservador · 10% otimista</div>
+      </div>
+    </div>
+    <div class="sim-out">
+      <div><span class="n" id="r-leads"></span><span class="t">pessoas no grupo aberto</span></div>
+      <div><span class="n" id="r-vendas"></span><span class="t">vendas (alunos + aberta)</span></div>
+      <div class="hl"><span class="n" id="r-fat"></span><span class="t">faturamento bruto</span></div>
+      <div><span class="n" id="r-roas"></span><span class="t">volta por R$ 1 de anúncio</span></div>
+    </div>
+    <div class="sim-break" id="r-break"></div>
+  </div>
+
+  <div class="cmp" id="cmp"></div>
+  <p class="note">Faturamento da onda aberta por verba, com o custo por lead escolhido no simulador e sem contar o orgânico. A linha destacada é a verba selecionada. Na prática o custo por lead tende a subir quando a verba cresce, então vale simular as verbas maiores com um custo por lead mais alto. Líquido estimado com a taxa da Hotmart (8,9% + R$ 1,59 por venda).</p>
+</section>
+
+<!-- ── 06 remuneração ── -->
+<section>
+  <div class="shead"><span class="num">06</span><h2>Remuneração do Matheus</h2></div>
+  <div class="pay">
+    <p>O fixo mensal combinado segue como está. Sobre ele, um variável ligado ao resultado da Black: se o Clube vender, eu ganho junto; se não vender, vocês não pagam nada além do fixo.</p>
+    <div class="pay-grid">
+      <div><div class="k">Fixo</div><div class="v">R$ 4 mil por mês, até o fim do contrato</div></div>
+      <div><div class="k">Variável</div><div class="v">10% do valor líquido recebido na Hotmart</div></div>
+      <div><div class="k">Sobre o quê</div><div class="v">Vendas do Clube do Plantonista nas duas ondas</div></div>
+      <div><div class="k">Janela</div><div class="v">21/10 a 15/11, descontados reembolsos</div></div>
+    </div>
+    <p style="margin-top:16px">Vendas do Clube depois de 15/11, no webinário gravado, entram na conversa da renovação do contrato, em dezembro.</p>
+    <p>No cenário do simulador acima, o variável seria de <b id="r-pay"></b>.</p>
+  </div>
+</section>
+
+<!-- ── 07 em aberto ── -->
+<section>
+  <div class="shead"><span class="num">07</span><h2>Para decidir na call</h2></div>
+  <ul class="open">
+    <li><b>Verba de captação da onda 2.</b> O simulador mostra o efeito de cada faixa.</li>
+    <li><b>Preço de aluno.</b> A sugestão é R$ 1.401 (R$ 1.998 menos os R$ 597 do ECG). Ele nunca pode ficar acima do preço da live aberta, porque os alunos vão ver a campanha.</li>
+    <li><b>Vitalício também no grupo e nos encontros?</b> O curso gravado vitalício não custa nada a mais. Grupo e encontros vitalícios são tempo do Vitor para sempre. Uma saída é vitalício nas aulas e 12 meses no acompanhamento.</li>
+    <li><b>Por onde sai o e-mail para os alunos.</b></li>
+  </ul>
+</section>
+
+<footer>Luswarghi · Dr. Vitor Coutinho · ECG Descomplicado · rascunho de 19/10/2026</footer>
+
+</div>
+
+<script>
+(function(){
+  var BASE=600, PRECO=1998, PRECO_ALUNO=1998-597, ENTRA_GRUPO=0.40;
+  var $=function(id){return document.getElementById(id)};
+  var brl=function(v){return 'R$ '+Math.round(v).toLocaleString('pt-BR')};
+  var mil=function(v){
+    if(v>=1000){var k=v/1000;return 'R$ '+(k>=100?Math.round(k):(Math.round(k*10)/10)).toLocaleString('pt-BR')+' mil'}
+    return brl(v);
+  };
+  var int=function(v){return Math.round(v).toLocaleString('pt-BR')};
+  var liquido=function(bruto,vendas){return bruto*(1-0.089)-1.59*vendas};
+
+  function calc(verba,cpl,conv,org,alu){
+    var leadsPagos=verba/cpl, leads=leadsPagos+org;
+    var vAb=Math.round(leads*conv/100), vAl=Math.round(BASE*alu/100);
+    var fAb=vAb*PRECO, fAl=vAl*PRECO_ALUNO, fat=fAb+fAl;
+    var liq=liquido(fat,vAb+vAl);
+    return {leads:leads,leadsPagos:leadsPagos,vAb:vAb,vAl:vAl,fAb:fAb,fAl:fAl,fat:fat,liq:liq,
+      roas:verba>0?(vAb*PRECO*(leadsPagos/Math.max(leads,1)))/verba:null};
+  }
+
+  var ids=['verba','cpl','conv','org','alu'];
+  function read(){return ids.map(function(i){return parseFloat($(i).value)})}
+
+  function render(){
+    var v=read(), r=calc.apply(null,v);
+    $('o-verba').textContent=v[0]===0?'sem anúncio':brl(v[0]);
+    $('o-cpl').textContent='R$ '+v[1].toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+    $('o-conv').textContent=v[2].toLocaleString('pt-BR')+'%';
+    $('o-org').textContent=int(v[3]);
+    $('o-alu').textContent=v[4]+'% · '+int(BASE*v[4]/100)+' alunos';
+    $('r-leads').textContent=int(r.leads);
+    $('r-vendas').textContent=int(r.vAb+r.vAl);
+    $('r-fat').textContent=mil(r.fat);
+    $('r-roas').textContent=r.roas===null?'—':'R$ '+r.roas.toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1});
+    var sobra=r.liq-v[0];
+    $('r-break').innerHTML='Alunos: <b>'+int(r.vAl)+' vendas · '+mil(r.fAl)+'</b> &nbsp;·&nbsp; Aberta: <b>'+int(r.vAb)+' vendas · '+mil(r.fAb)+'</b> &nbsp;·&nbsp; Líquido Hotmart: <b>'+mil(r.liq)+'</b> &nbsp;·&nbsp; Depois de pagar o anúncio: <b>'+mil(sobra)+'</b>';
+    $('r-pay').textContent=mil(r.liq*0.10)+' ('+mil(r.liq)+' de líquido)';
+    document.querySelectorAll('#presets button').forEach(function(b){b.setAttribute('aria-pressed',String(+b.dataset.v===v[0]))});
+    renderCmp(v);
+  }
+
+  function renderCmp(v){
+    var verbas=[5000,10000,15000,20000,30000], cpl=v[1];
+    var h='<table><thead><tr><th>Verba</th><th>Leads</th><th>Vendas a 2%</th><th>Fatura a 1%</th><th>Fatura a 2%</th><th>Fatura a 3%</th><th>Volta por R$ 1 (2%)</th></tr></thead><tbody>';
+    verbas.forEach(function(vb){
+      var l=vb/cpl, f=function(c){return Math.round(l*c/100)*PRECO};
+      h+='<tr'+(vb===v[0]?' class="cur"':'')+'><td>'+mil(vb)+'</td><td>'+int(l)+'</td><td>'+int(Math.round(l*0.02))+'</td><td>'+mil(f(1))+'</td><td class="strong">'+mil(f(2))+'</td><td>'+mil(f(3))+'</td><td>R$ '+(f(2)/vb).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1})+'</td></tr>';
+    });
+    $('cmp').innerHTML=h+'</tbody></table>';
+  }
+
+  function renderMetas(){
+    var alunosGrupo=Math.round(BASE*ENTRA_GRUPO), vAl=Math.round(BASE*0.06);
+    var leads=Math.round(10000/8), vAb=Math.round(leads*0.02);
+    var row=function(c){return '<div class="frow'+(c.cls?' '+c.cls:'')+'">'+c.cells.map(function(x){return '<div>'+x+'</div>'}).join('')+'</div>'};
+    var html=row({cls:'h',cells:['','Convidados','No grupo','Vendas','Faturamento']});
+    html+=row({cells:['Onda 1 · alunos','<b>'+int(BASE)+'</b><small>base de alunos</small>','<b>'+int(alunosGrupo)+'</b><small>40% da base</small>','<b>'+vAl+'</b><small>6% da base</small>','<b>'+mil(vAl*PRECO_ALUNO)+'</b>']});
+    html+=row({cells:['Onda 2 · aberta','<b>R$ 10 mil</b><small>em captação</small>','<b>'+int(leads)+'</b><small>lead a R$ 8</small>','<b>'+vAb+'</b><small>2% do grupo</small>','<b>'+mil(vAb*PRECO)+'</b>']});
+    html+=row({cls:'tot',cells:['Black inteira','','','<b>'+(vAl+vAb)+'</b>','<b>'+mil(vAl*PRECO_ALUNO+vAb*PRECO)+'</b>']});
+    $('metas').innerHTML=html;
+  }
+
+  ids.forEach(function(i){$(i).addEventListener('input',render)});
+  document.querySelectorAll('#presets button').forEach(function(b){
+    b.addEventListener('click',function(){$('verba').value=b.dataset.v;render()});
+  });
+  renderMetas(); render();
+})();
+</script>
+</body>
+</html>
